@@ -23,6 +23,34 @@ public:
     return *this;
   }
 
+  template <class RHS>
+  FastArray & operator+=(const RHS & rhs) {
+    for(IndexT i=0; i < m_size; ++i)
+      m_x[i] += rhs[i];
+    return *this;
+  }
+
+  template <class RHS>
+  FastArray & operator-=(const RHS & rhs) {
+    for(IndexT i=0; i < m_size; ++i)
+      m_x[i] -= rhs[i];
+    return *this;
+  }
+
+  template <class RHS>
+  FastArray & operator*=(const RHS & rhs) {
+    for(IndexT i=0; i < m_size; ++i)
+      m_x[i] *= rhs[i];
+    return *this;
+  }
+
+  template <class RHS>
+  FastArray & operator/=(const RHS & rhs) {
+    for(IndexT i=0; i < m_size; ++i)
+      m_x[i] /= rhs[i];
+    return *this;
+  }
+
   ScalarT & operator[](const IndexT i) {
     return m_x[i];
   }

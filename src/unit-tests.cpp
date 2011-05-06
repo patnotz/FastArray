@@ -148,3 +148,100 @@ TEST(FastArray, mult_plus)
     ASSERT_DOUBLE_EQ(d, fd[i]);
   }
 }
+
+TEST(FastArray, plus_equals)
+{
+  const fa::IndexT size = 1000;
+  const fa::ScalarT a = 3;
+  const fa::ScalarT b = 4;
+  fa::ScalarT c = 11;
+
+  fa::FastArray fa(size);
+  fa::FastArray fb(size);
+  fa::FastArray fc(size);
+  fa::FastArray fd(size);
+  for(int i=0; i < size; ++i) {
+    fa[i] = a;
+    fb[i] = b;
+    fc[i] = c;
+  }
+  c += a + b;
+  fc += fa + fb;
+
+  for(int i=0; i < size; ++i) {
+    ASSERT_DOUBLE_EQ(c, fc[i]);
+  }
+}
+
+TEST(FastArray, minus_equals)
+{
+  const fa::IndexT size = 1000;
+  const fa::ScalarT a = 3;
+  const fa::ScalarT b = 4;
+  fa::ScalarT c = 11;
+
+  fa::FastArray fa(size);
+  fa::FastArray fb(size);
+  fa::FastArray fc(size);
+  fa::FastArray fd(size);
+  for(int i=0; i < size; ++i) {
+    fa[i] = a;
+    fb[i] = b;
+    fc[i] = c;
+  }
+  c -= a + b;
+  fc -= fa + fb;
+
+  for(int i=0; i < size; ++i) {
+    ASSERT_DOUBLE_EQ(c, fc[i]);
+  }
+}
+
+TEST(FastArray, multiply_equals)
+{
+  const fa::IndexT size = 1000;
+  const fa::ScalarT a = 3;
+  const fa::ScalarT b = 4;
+  fa::ScalarT c = 11;
+
+  fa::FastArray fa(size);
+  fa::FastArray fb(size);
+  fa::FastArray fc(size);
+  fa::FastArray fd(size);
+  for(int i=0; i < size; ++i) {
+    fa[i] = a;
+    fb[i] = b;
+    fc[i] = c;
+  }
+  c *= a + b;
+  fc *= fa + fb;
+
+  for(int i=0; i < size; ++i) {
+    ASSERT_DOUBLE_EQ(c, fc[i]);
+  }
+}
+
+TEST(FastArray, divide_equals)
+{
+  const fa::IndexT size = 1000;
+  const fa::ScalarT a = 3;
+  const fa::ScalarT b = 4;
+  fa::ScalarT c = 11;
+
+  fa::FastArray fa(size);
+  fa::FastArray fb(size);
+  fa::FastArray fc(size);
+  fa::FastArray fd(size);
+  for(int i=0; i < size; ++i) {
+    fa[i] = a;
+    fb[i] = b;
+    fc[i] = c;
+  }
+  c /= a + b;
+  fc /= fa + fb;
+
+  for(int i=0; i < size; ++i) {
+    ASSERT_DOUBLE_EQ(c, fc[i]);
+  }
+}
+
