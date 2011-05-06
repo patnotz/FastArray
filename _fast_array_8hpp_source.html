@@ -106,86 +106,114 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00023"></a>00023     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00024"></a>00024   }
 <a name="l00025"></a>00025 
-<a name="l00026"></a>00026   ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i) {
-<a name="l00027"></a>00027     <span class="keywordflow">return</span> m_x[i];
-<a name="l00028"></a>00028   }
-<a name="l00029"></a>00029   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i)<span class="keyword"> const </span>{
-<a name="l00030"></a>00030     <span class="keywordflow">return</span> m_x[i];
+<a name="l00026"></a>00026   <span class="keyword">template</span> &lt;<span class="keyword">class</span> RHS&gt;
+<a name="l00027"></a>00027   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator+=(<span class="keyword">const</span> RHS &amp; rhs) {
+<a name="l00028"></a>00028     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00029"></a>00029       m_x[i] += rhs[i];
+<a name="l00030"></a>00030     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00031"></a>00031   }
 <a name="l00032"></a>00032 
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="keyword">private</span>:
-<a name="l00035"></a>00035   ScalarT * m_x;
-<a name="l00036"></a>00036   IndexT m_size;
-<a name="l00037"></a>00037 };
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> OpTag, <span class="keyword">class</span> R&gt;
-<a name="l00040"></a><a class="code" href="structfa_1_1_binary_op.html">00040</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1_binary_op.html">BinaryOp</a> {
-<a name="l00041"></a>00041   <a class="code" href="structfa_1_1_binary_op.html">BinaryOp</a>(<span class="keyword">const</span> L &amp; left_, <span class="keyword">const</span> R &amp; right_) :
-<a name="l00042"></a>00042     left(left_), right(right_) {}
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044   ScalarT operator[](IndexT i)<span class="keyword"> const </span>{
-<a name="l00045"></a>00045     <span class="keywordflow">return</span> OpTag::apply(left[i],right[i]);
-<a name="l00046"></a>00046   }
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048   <span class="keyword">const</span> L &amp; left;
-<a name="l00049"></a>00049   <span class="keyword">const</span> R &amp; right;
-<a name="l00050"></a>00050 };
-<a name="l00051"></a>00051 
-<a name="l00052"></a><a class="code" href="structfa_1_1plus.html">00052</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1plus.html">plus</a> {
-<a name="l00053"></a>00053   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
-<a name="l00054"></a>00054     <span class="keywordflow">return</span> a + b;
-<a name="l00055"></a>00055   }
-<a name="l00056"></a>00056 };
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
-<a name="l00059"></a>00059 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,plus,R&gt;</a> operator+(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
-<a name="l00060"></a>00060   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,plus,R&gt;</a>(left,right);
-<a name="l00061"></a>00061 }
-<a name="l00062"></a>00062 
-<a name="l00063"></a><a class="code" href="structfa_1_1minus.html">00063</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1minus.html">minus</a> {
-<a name="l00064"></a>00064   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
-<a name="l00065"></a>00065     <span class="keywordflow">return</span> a - b;
-<a name="l00066"></a>00066   }
-<a name="l00067"></a>00067 };
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
-<a name="l00070"></a>00070 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,minus,R&gt;</a> operator-(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
-<a name="l00071"></a>00071   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,minus,R&gt;</a>(left,right);
-<a name="l00072"></a>00072 }
-<a name="l00073"></a>00073 
-<a name="l00074"></a><a class="code" href="structfa_1_1mult.html">00074</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1mult.html">mult</a> {
-<a name="l00075"></a>00075   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
-<a name="l00076"></a>00076     <span class="keywordflow">return</span> a * b;
-<a name="l00077"></a>00077   }
+<a name="l00033"></a>00033   <span class="keyword">template</span> &lt;<span class="keyword">class</span> RHS&gt;
+<a name="l00034"></a>00034   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator-=(<span class="keyword">const</span> RHS &amp; rhs) {
+<a name="l00035"></a>00035     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00036"></a>00036       m_x[i] -= rhs[i];
+<a name="l00037"></a>00037     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00038"></a>00038   }
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040   <span class="keyword">template</span> &lt;<span class="keyword">class</span> RHS&gt;
+<a name="l00041"></a>00041   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator*=(<span class="keyword">const</span> RHS &amp; rhs) {
+<a name="l00042"></a>00042     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00043"></a>00043       m_x[i] *= rhs[i];
+<a name="l00044"></a>00044     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00045"></a>00045   }
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047   <span class="keyword">template</span> &lt;<span class="keyword">class</span> RHS&gt;
+<a name="l00048"></a>00048   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator/=(<span class="keyword">const</span> RHS &amp; rhs) {
+<a name="l00049"></a>00049     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00050"></a>00050       m_x[i] /= rhs[i];
+<a name="l00051"></a>00051     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00052"></a>00052   }
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054   ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i) {
+<a name="l00055"></a>00055     <span class="keywordflow">return</span> m_x[i];
+<a name="l00056"></a>00056   }
+<a name="l00057"></a>00057   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i)<span class="keyword"> const </span>{
+<a name="l00058"></a>00058     <span class="keywordflow">return</span> m_x[i];
+<a name="l00059"></a>00059   }
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="keyword">private</span>:
+<a name="l00063"></a>00063   ScalarT * m_x;
+<a name="l00064"></a>00064   IndexT m_size;
+<a name="l00065"></a>00065 };
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> OpTag, <span class="keyword">class</span> R&gt;
+<a name="l00068"></a><a class="code" href="structfa_1_1_binary_op.html">00068</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1_binary_op.html">BinaryOp</a> {
+<a name="l00069"></a>00069   <a class="code" href="structfa_1_1_binary_op.html">BinaryOp</a>(<span class="keyword">const</span> L &amp; left_, <span class="keyword">const</span> R &amp; right_) :
+<a name="l00070"></a>00070     left(left_), right(right_) {}
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072   ScalarT operator[](IndexT i)<span class="keyword"> const </span>{
+<a name="l00073"></a>00073     <span class="keywordflow">return</span> OpTag::apply(left[i],right[i]);
+<a name="l00074"></a>00074   }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076   <span class="keyword">const</span> L &amp; left;
+<a name="l00077"></a>00077   <span class="keyword">const</span> R &amp; right;
 <a name="l00078"></a>00078 };
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
-<a name="l00081"></a>00081 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,mult,R&gt;</a> operator*(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
-<a name="l00082"></a>00082   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,mult,R&gt;</a>(left,right);
-<a name="l00083"></a>00083 }
-<a name="l00084"></a>00084 
-<a name="l00085"></a><a class="code" href="structfa_1_1divide.html">00085</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1divide.html">divide</a> {
-<a name="l00086"></a>00086   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
-<a name="l00087"></a>00087     <span class="keywordflow">return</span> a / b;
-<a name="l00088"></a>00088   }
-<a name="l00089"></a>00089 };
+<a name="l00080"></a><a class="code" href="structfa_1_1plus.html">00080</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1plus.html">plus</a> {
+<a name="l00081"></a>00081   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
+<a name="l00082"></a>00082     <span class="keywordflow">return</span> a + b;
+<a name="l00083"></a>00083   }
+<a name="l00084"></a>00084 };
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
+<a name="l00087"></a>00087 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,plus,R&gt;</a> operator+(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
+<a name="l00088"></a>00088   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,plus,R&gt;</a>(left,right);
+<a name="l00089"></a>00089 }
 <a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
-<a name="l00092"></a>00092 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,divide,R&gt;</a> operator/(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
-<a name="l00093"></a>00093   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,divide,R&gt;</a>(left,right);
-<a name="l00094"></a>00094 }
-<a name="l00095"></a>00095 
+<a name="l00091"></a><a class="code" href="structfa_1_1minus.html">00091</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1minus.html">minus</a> {
+<a name="l00092"></a>00092   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
+<a name="l00093"></a>00093     <span class="keywordflow">return</span> a - b;
+<a name="l00094"></a>00094   }
+<a name="l00095"></a>00095 };
 <a name="l00096"></a>00096 
-<a name="l00097"></a>00097 } <span class="comment">// namespace fa</span>
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099 <span class="preprocessor">#endif // FASTARRAY_HPP_</span>
+<a name="l00097"></a>00097 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
+<a name="l00098"></a>00098 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,minus,R&gt;</a> operator-(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
+<a name="l00099"></a>00099   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,minus,R&gt;</a>(left,right);
+<a name="l00100"></a>00100 }
+<a name="l00101"></a>00101 
+<a name="l00102"></a><a class="code" href="structfa_1_1mult.html">00102</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1mult.html">mult</a> {
+<a name="l00103"></a>00103   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
+<a name="l00104"></a>00104     <span class="keywordflow">return</span> a * b;
+<a name="l00105"></a>00105   }
+<a name="l00106"></a>00106 };
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
+<a name="l00109"></a>00109 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,mult,R&gt;</a> operator*(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
+<a name="l00110"></a>00110   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,mult,R&gt;</a>(left,right);
+<a name="l00111"></a>00111 }
+<a name="l00112"></a>00112 
+<a name="l00113"></a><a class="code" href="structfa_1_1divide.html">00113</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1divide.html">divide</a> {
+<a name="l00114"></a>00114   <span class="keyword">static</span> ScalarT apply(<span class="keyword">const</span> ScalarT a, <span class="keyword">const</span> ScalarT b) {
+<a name="l00115"></a>00115     <span class="keywordflow">return</span> a / b;
+<a name="l00116"></a>00116   }
+<a name="l00117"></a>00117 };
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119 <span class="keyword">template</span> &lt;<span class="keyword">class</span> L, <span class="keyword">class</span> R&gt;
+<a name="l00120"></a>00120 <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,divide,R&gt;</a> operator/(<span class="keyword">const</span> L &amp; left, <span class="keyword">const</span> R &amp; right) {
+<a name="l00121"></a>00121   <span class="keywordflow">return</span> <a class="code" href="structfa_1_1_binary_op.html">BinaryOp&lt;L,divide,R&gt;</a>(left,right);
+<a name="l00122"></a>00122 }
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125 } <span class="comment">// namespace fa</span>
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127 <span class="preprocessor">#endif // FASTARRAY_HPP_</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>FastArray.hpp</b>      </li>
-      <li class="footer">Generated on Fri May 6 2011 14:34:10 for FastArray by&#160;
+      <li class="footer">Generated on Fri May 6 2011 14:49:40 for FastArray by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
