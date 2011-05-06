@@ -10,7 +10,6 @@
 1. Copy and tailor your CMake script
     <pre><code>
     $ cp ../doc/do-cmake
-    $ emacs do-cmake # set your Trilinos installation location
     </code></pre>
 1. Build
     <pre><code>
@@ -19,14 +18,11 @@
     </code></pre>
 1. Run it
     <pre><code>
-    src/fa
+    src/unit-tests
     </code></pre>
 
 ## TODO
- - Everything
-
-[Trilinos]: http://trilinos.sandia.gov/
-[Phalanx]: http://trilinos.sandia.gov/packages/phalanx/
-[Kokkos]: http://trilinos.sandia.gov/packages/kokkos/
-[Fusion]: http://www.boost.org/doc%/libs/release/libs/fusion
-[MCPPD]: http://www.amazon.com/Modern-Design-Generic-Programming-Patterns/dp/0201704315
+ - Pretty much everything
+ - Expression Templates involving raw scalar types, like `double * FastArray` 
+ - Debug error checking
+ - Math and Trig functions
