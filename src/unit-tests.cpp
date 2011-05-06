@@ -159,7 +159,6 @@ TEST(FastArray, plus_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  fa::FastArray fd(size);
   for(int i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
@@ -183,7 +182,6 @@ TEST(FastArray, minus_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  fa::FastArray fd(size);
   for(int i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
@@ -207,7 +205,6 @@ TEST(FastArray, multiply_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  fa::FastArray fd(size);
   for(int i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
@@ -231,7 +228,6 @@ TEST(FastArray, divide_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  fa::FastArray fd(size);
   for(int i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
