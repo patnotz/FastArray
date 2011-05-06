@@ -118,10 +118,10 @@ TEST(FastArray, plus_plus)
     fc[i] = c;
   }
   const fa::ScalarT d = a + b + c;
-  fc = fa + fb + fc;
+  fd = fa + fb + fc;
 
   for(int i=0; i < size; ++i) {
-    ASSERT_DOUBLE_EQ(d, fc[i]);
+    ASSERT_DOUBLE_EQ(d, fd[i]);
   }
 }
 
@@ -142,9 +142,9 @@ TEST(FastArray, mult_plus)
     fc[i] = c;
   }
   const fa::ScalarT d = a * (b + c);
-  fc = fa * (fb + fc);
+  fd = fa * (fb + fc);
 
   for(int i=0; i < size; ++i) {
-    ASSERT_DOUBLE_EQ(d, fc[i]);
+    ASSERT_DOUBLE_EQ(d, fd[i]);
   }
 }
