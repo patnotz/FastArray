@@ -226,6 +226,10 @@ FA_BINARY_OP(addition,       operator+, m_left[i] + m_right[i]);
 FA_BINARY_OP(subtraction,    operator-, m_left[i] - m_right[i]);
 FA_BINARY_OP(mulitiplication,operator*, m_left[i] * m_right[i]);
 FA_BINARY_OP(division,       operator/, m_left[i] / m_right[i]);
+FA_BINARY_OP(math_pow,       pow, std::pow(m_left[i], m_right[i]));
+FA_BINARY_OP(math_max,       max, std::max(m_left[i], m_right[i]));
+FA_BINARY_OP(math_min,       min, std::min(m_left[i], m_right[i]));
+FA_BINARY_OP(math_atan2,     atan2, std::atan2(m_left[i], m_right[i]));
 #undef FA_BINARY_OP
 
 #define FA_UNARY_OP(LABEL,OPERATOR,EXPR) \

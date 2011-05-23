@@ -409,7 +409,7 @@ TEST(FastArray, unary_plus)
   }
 }
 
-#define TEST_STD_MATH(TESTNAME, FCN, VAL) \
+#define TEST_STD_MATH_UNARY(TESTNAME, FCN, VAL) \
 TEST(FastArray, TESTNAME) \
 { \
   const fa::IndexT size = 1000; \
@@ -425,26 +425,53 @@ TEST(FastArray, TESTNAME) \
   } \
 }
 
-TEST_STD_MATH(math_exp,exp,3);
-TEST_STD_MATH(math_log,log,3);
-TEST_STD_MATH(math_log10,log10,3);
-TEST_STD_MATH(math_sqrt,sqrt,7);
+TEST_STD_MATH_UNARY(math_exp,exp,3);
+TEST_STD_MATH_UNARY(math_log,log,3);
+TEST_STD_MATH_UNARY(math_log10,log10,3);
+TEST_STD_MATH_UNARY(math_sqrt,sqrt,7);
 
-TEST_STD_MATH(math_cos,cos,2.1);
-TEST_STD_MATH(math_sin,sin,2.1);
-TEST_STD_MATH(math_tan,tan,2.1);
-TEST_STD_MATH(math_acos,acos,0.7);
-TEST_STD_MATH(math_asin,asin,0.7);
-TEST_STD_MATH(math_atan,atan,0.7);
+TEST_STD_MATH_UNARY(math_cos,cos,2.1);
+TEST_STD_MATH_UNARY(math_sin,sin,2.1);
+TEST_STD_MATH_UNARY(math_tan,tan,2.1);
+TEST_STD_MATH_UNARY(math_acos,acos,0.7);
+TEST_STD_MATH_UNARY(math_asin,asin,0.7);
+TEST_STD_MATH_UNARY(math_atan,atan,0.7);
 
-TEST_STD_MATH(math_cosh,cosh,2.1);
-TEST_STD_MATH(math_sinh,sinh,2.1);
-TEST_STD_MATH(math_tanh,tanh,2.1);
+TEST_STD_MATH_UNARY(math_cosh,cosh,2.1);
+TEST_STD_MATH_UNARY(math_sinh,sinh,2.1);
+TEST_STD_MATH_UNARY(math_tanh,tanh,2.1);
 
-TEST_STD_MATH(math_abs_pos,abs,1.1);
-TEST_STD_MATH(math_abs_neg,abs,-1.1);
-TEST_STD_MATH(math_fabs_pos,fabs,1.1);
-TEST_STD_MATH(math_fabs_neg,fabs,-1.1);
+TEST_STD_MATH_UNARY(math_abs_pos,abs,1.1);
+TEST_STD_MATH_UNARY(math_abs_neg,abs,-1.1);
+TEST_STD_MATH_UNARY(math_fabs_pos,fabs,1.1);
+TEST_STD_MATH_UNARY(math_fabs_neg,fabs,-1.1);
+#undef TEST_STD_MATH_UNARY
 
-#undef TEST_STD_MATH
+#define TEST_STD_MATH_BINARY(TESTNAME, FCN, VAL_A, VAL_B, OBJ_A, OBJ_B) \
+TEST(FastArray, TESTNAME) \
+{ \
+  const fa::IndexT size = 1000; \
+  const fa::ScalarT a = VAL_A; \
+  const fa::ScalarT b = VAL_B; \
+ \
+  fa::FastArray fa(size, a); \
+  fa::FastArray fb(size, b); \
+  fa::FastArray fc(size); \
+  fc = FCN(OBJ_A,OBJ_B); \
+  const fa::ScalarT c = std::FCN(a,b); \
+ \
+  for(int i=0; i < size; ++i) { \
+    ASSERT_DOUBLE_EQ(c, fc[i]); \
+  } \
+}
+TEST_STD_MATH_BINARY(math_pow_a, pow, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_pow_c, pow, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_max_a, max, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_max_c, max, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_min_a, min, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_min_c, min, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_atan2_a, atan2, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_atan2_c, atan2, 2, 3, fa, b);
+#undef TEST_STD_MATH_BINARY
+
 
