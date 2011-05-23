@@ -464,14 +464,20 @@ TEST(FastArray, TESTNAME) \
     ASSERT_DOUBLE_EQ(c, fc[i]); \
   } \
 }
-TEST_STD_MATH_BINARY(math_pow_a, pow, 2, 3, fa, fb);
-TEST_STD_MATH_BINARY(math_pow_c, pow, 2, 3, fa, b);
-TEST_STD_MATH_BINARY(math_max_a, max, 2, 3, fa, fb);
-TEST_STD_MATH_BINARY(math_max_c, max, 2, 3, fa, b);
-TEST_STD_MATH_BINARY(math_min_a, min, 2, 3, fa, fb);
-TEST_STD_MATH_BINARY(math_min_c, min, 2, 3, fa, b);
-TEST_STD_MATH_BINARY(math_atan2_a, atan2, 2, 3, fa, fb);
-TEST_STD_MATH_BINARY(math_atan2_c, atan2, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_pow_aa, pow, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_pow_ac, pow, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_pow_ca, pow, 2, 3, a, fb);
+TEST_STD_MATH_BINARY(math_pow_cc, pow, 2, 3, a, b);
+TEST_STD_MATH_BINARY(math_max_aa, max, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_max_ac, max, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_max_ca, max, 2, 3, a, fb);
+TEST_STD_MATH_BINARY(math_min_aa, min, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_min_ac, min, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_min_ca, min, 2, 3, a, fb);
+TEST_STD_MATH_BINARY(math_atan2_aa, atan2, 2, 3, fa, fb);
+TEST_STD_MATH_BINARY(math_atan2_ac, atan2, 2, 3, fa, b);
+TEST_STD_MATH_BINARY(math_atan2_ca, atan2, 2, 3, a, fb);
+TEST_STD_MATH_BINARY(math_atan2_cc, atan2, 2, 3, a, b);
 #undef TEST_STD_MATH_BINARY
 
 TEST(FastArray, kitchen_sink)
