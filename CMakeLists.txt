@@ -9,7 +9,7 @@ PROJECT(FastArray)
 # GTest
 # See: http://code.google.com/p/googletest/
 ################################################################################
-set(GTEST_DIR gtest-1.5.0)
+set(GTEST_DIR gtest-1.6.0)
 set(GTEST_INCLUDE_DIRECTORIES ${GTEST_DIR}/include ${GTEST_DIR} ${GTEST_DIR}/src)
 include_directories(${GTEST_INCLUDE_DIRECTORIES})
 add_library(gtest ${GTEST_DIR}/src/gtest-all.cc ${GTEST_DIR}/src/gtest_main.cc)
