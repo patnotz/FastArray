@@ -382,3 +382,69 @@ TEST(FastArray, complex_binop)
     ASSERT_DOUBLE_EQ(f, ff[i]);
   }
 }
+
+TEST(FastArray, unary_minus)
+{
+  const fa::IndexT size = 1000;
+  const fa::ScalarT a = 3;
+
+  fa::FastArray fa(size, a);
+  fa::FastArray fb(size);
+  fb = -fa;
+  for(int i=0; i < size; ++i) {
+    ASSERT_DOUBLE_EQ(-a, fb[i]);
+  }
+}
+
+TEST(FastArray, unary_plus)
+{
+  const fa::IndexT size = 1000;
+  const fa::ScalarT a = 3;
+
+  fa::FastArray fa(size, a);
+  fa::FastArray fb(size);
+  fb = +fa;
+  for(int i=0; i < size; ++i) {
+    ASSERT_DOUBLE_EQ(a, fb[i]);
+  }
+}
+
+#define TEST_STD_MATH(TESTNAME, FCN, VAL) \
+TEST(FastArray, TESTNAME) \
+{ \
+  const fa::IndexT size = 1000; \
+  const fa::ScalarT a = VAL; \
+ \
+  fa::FastArray fa(size, a); \
+  fa::FastArray fb(size); \
+  fb = FCN(fa); \
+  const fa::ScalarT b = std::FCN(a); \
+ \
+  for(int i=0; i < size; ++i) { \
+    ASSERT_DOUBLE_EQ(b, fb[i]); \
+  } \
+}
+
+TEST_STD_MATH(math_exp,exp,3);
+TEST_STD_MATH(math_log,log,3);
+TEST_STD_MATH(math_log10,log10,3);
+TEST_STD_MATH(math_sqrt,sqrt,7);
+
+TEST_STD_MATH(math_cos,cos,2.1);
+TEST_STD_MATH(math_sin,sin,2.1);
+TEST_STD_MATH(math_tan,tan,2.1);
+TEST_STD_MATH(math_acos,acos,0.7);
+TEST_STD_MATH(math_asin,asin,0.7);
+TEST_STD_MATH(math_atan,atan,0.7);
+
+TEST_STD_MATH(math_cosh,cosh,2.1);
+TEST_STD_MATH(math_sinh,sinh,2.1);
+TEST_STD_MATH(math_tanh,tanh,2.1);
+
+TEST_STD_MATH(math_abs_pos,abs,1.1);
+TEST_STD_MATH(math_abs_neg,abs,-1.1);
+TEST_STD_MATH(math_fabs_pos,fabs,1.1);
+TEST_STD_MATH(math_fabs_neg,fabs,-1.1);
+
+#undef TEST_STD_MATH
+

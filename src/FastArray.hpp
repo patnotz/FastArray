@@ -1,6 +1,8 @@
 #ifndef FASTARRAY_HPP_
 #define FASTARRAY_HPP_
 
+#include <cmath>
+
 namespace fa {
 
 typedef double ScalarT;
@@ -225,6 +227,46 @@ FA_BINARY_OP(subtraction,    operator-, m_left[i] - m_right[i]);
 FA_BINARY_OP(mulitiplication,operator*, m_left[i] * m_right[i]);
 FA_BINARY_OP(division,       operator/, m_left[i] / m_right[i]);
 #undef FA_BINARY_OP
+
+#define FA_UNARY_OP(LABEL,OPERATOR,EXPR) \
+template <class T> struct LABEL {}; \
+\
+template <class T> \
+struct term< LABEL< term<T> > > { \
+  typedef term<T> TermT; \
+  typedef typename TermT::ValueT ValueT; \
+  term(const term<T> & t) : m_t(t) {} \
+  ValueT operator[](const IndexT i) const { \
+    return EXPR; \
+  } \
+  const term<T> m_t; \
+}; \
+\
+template <class T> \
+inline term< LABEL< term<T> > > \
+OPERATOR(const T & t) { \
+  typedef LABEL< term<T> > TermT; \
+  return term<TermT>(t); \
+}
+
+FA_UNARY_OP(unary_minus, operator-, -m_t[i]);
+FA_UNARY_OP(unary_plus,  operator+, m_t[i]);
+FA_UNARY_OP(math_exp,    exp, std::exp(m_t[i]));
+FA_UNARY_OP(math_log,    log, std::log(m_t[i]));
+FA_UNARY_OP(math_log10,  log10, std::log10(m_t[i]));
+FA_UNARY_OP(math_sqrt,   sqrt, std::sqrt(m_t[i]));
+FA_UNARY_OP(math_cos,    cos, std::cos(m_t[i]));
+FA_UNARY_OP(math_sin,    sin, std::sin(m_t[i]));
+FA_UNARY_OP(math_tan,    tan, std::tan(m_t[i]));
+FA_UNARY_OP(math_acos,   acos, std::acos(m_t[i]));
+FA_UNARY_OP(math_asin,   asin, std::asin(m_t[i]));
+FA_UNARY_OP(math_atan,   atan, std::atan(m_t[i]));
+FA_UNARY_OP(math_cosh,   cosh, std::cosh(m_t[i]));
+FA_UNARY_OP(math_sinh,   sinh, std::sinh(m_t[i]));
+FA_UNARY_OP(math_tanh,   tanh, std::tanh(m_t[i]));
+FA_UNARY_OP(math_abs,    abs, std::abs(m_t[i]));
+FA_UNARY_OP(math_fabs,   fabs, std::fabs(m_t[i]));
+#undef FA_UNARY_OP
 
 } // namespace fa
 
