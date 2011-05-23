@@ -22,9 +22,7 @@
     </code></pre>
 
 ## TODO
- - Pretty much everything
- - Capacity vs. size
+ - Should operator= et al. check sizes and call resize()?
  - Debug error checking (size compatibility, bounds checking)
- - Resize method
  - Math and Trig functions
  - Unary ops

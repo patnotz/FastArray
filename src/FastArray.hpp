@@ -57,22 +57,24 @@ struct term {
 struct FastArray {
   typedef ScalarT ValueT;
 
-  FastArray() : m_x(0), m_size(0) {}
+  FastArray() :
+    m_x(0), m_size(0), m_capacity(0) {
+  }
 
-  FastArray(const IndexT size) : m_x(0), m_size(size) {
-    m_x = new ScalarT[m_size];
+  explicit FastArray(const IndexT initial_size) :
+    m_x(0), m_size(0), m_capacity(0) {
+    resize(initial_size);
     // not initialized for efficiency
   }
 
-  FastArray(const IndexT size, const ScalarT val) : m_x(0), m_size(size) {
-    m_x = new ScalarT[m_size];
-    for(IndexT i=0; i < m_size; ++i)
-      m_x[i] = val;
+  FastArray(const IndexT initial_size, const ScalarT val) :
+    m_x(0), m_size(0), m_capacity(0) {
+    resize(initial_size);
+    set_all(val);
   }
 
   FastArray(const FastArray & other) {
-    m_size = other.m_size;
-    m_x = new ScalarT[m_size];
+    resize(other.size());
     for(IndexT i=0; i < m_size; ++i)
       m_x[i] = other.m_x[i];
   }
@@ -80,13 +82,7 @@ struct FastArray {
   FastArray & operator=(const FastArray & other) {
     if(this == &other)
       return *this;
-
-    // need to resize : FIXME: size vs. capacity
-    if (m_size != other.m_size) {
-      if (m_x != 0) delete[] m_x;
-      m_size = other.m_size;
-      m_x = new ScalarT[m_size];
-    }
+    resize(other.size());
     for(IndexT i=0; i < m_size; ++i)
       m_x[i] = other.m_x[i];
     return *this;
@@ -96,9 +92,28 @@ struct FastArray {
     if ( m_x != 0 ) delete[] m_x;
   }
 
-  FastArray & operator=(const ScalarT & value) {
+  void resize(const IndexT new_size) {
+    if ( m_capacity >= new_size ) {
+      // no need to re-allocate
+      m_size = new_size;
+      return;
+    }
+    // if we're here, then m_capacity (and m_size) < new_size
+    if ( m_x != 0 )
+      delete[] m_x;
+    m_size = new_size;
+    m_capacity = new_size;
+    m_x = new ScalarT[m_capacity];
+    // not initialized for efficiency
+  }
+
+  void set_all(const ScalarT & value) {
     for(IndexT i=0; i < m_size; ++i)
       m_x[i] = value;
+  }
+
+  FastArray & operator=(const ScalarT & value) {
+    set_all(value);
     return *this;
   }
 
@@ -146,9 +161,13 @@ struct FastArray {
   IndexT size() const {
     return m_size;
   }
+  IndexT capacity() const {
+    return m_capacity;
+  }
 private:
   ScalarT * m_x;
   IndexT m_size;
+  IndexT m_capacity;
 };
 
 template <>

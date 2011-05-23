@@ -4,7 +4,29 @@
 // This test is mostly meant as a concise example of how to parse and access
 // Json data and to make sure the build is working. It's not meant to an
 // exhaustive test of the JsonCPP package.
-TEST(FastArray, pass)
+TEST(FastArray, resize)
+{
+  const fa::IndexT orig_size = 1000;
+  fa::FastArray fa(orig_size);
+  ASSERT_EQ(orig_size,fa.size());
+  ASSERT_EQ(orig_size,fa.capacity());
+
+  const fa::IndexT smaller_size = 500;
+  fa.resize(smaller_size);
+  ASSERT_EQ(smaller_size,fa.size());
+  ASSERT_EQ(orig_size,fa.capacity());
+
+  const fa::IndexT bigger_size = 2000;
+  fa.resize(bigger_size);
+  ASSERT_EQ(bigger_size,fa.size());
+  ASSERT_EQ(bigger_size,fa.capacity());
+
+  fa.resize(smaller_size);
+  ASSERT_EQ(smaller_size,fa.size());
+  ASSERT_EQ(bigger_size,fa.capacity());
+}
+
+TEST(FastArray, operator_bracket)
 {
   const fa::IndexT size = 1000;
   fa::FastArray fa(size);
@@ -337,7 +359,7 @@ TEST(FastArray, plus_double)
   }
 }
 
-TEST(FastArray, complext_binop)
+TEST(FastArray, complex_binop)
 {
   const fa::IndexT size = 1000;
   const fa::ScalarT a = 3;
