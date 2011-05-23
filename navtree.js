@@ -2,12 +2,12 @@ var NAVTREE =
 [
   [ "FastArray", "index.html", [
     [ "Class List", "annotated.html", [
-      [ "fa::BinaryOp< L, OpTag, R >", "structfa_1_1_binary_op.html", null ],
-      [ "fa::divide", "structfa_1_1divide.html", null ],
       [ "fa::FastArray", "structfa_1_1_fast_array.html", null ],
-      [ "fa::minus", "structfa_1_1minus.html", null ],
-      [ "fa::mult", "structfa_1_1mult.html", null ],
-      [ "fa::plus", "structfa_1_1plus.html", null ]
+      [ "fa::promote< T1, T2 >", "structfa_1_1promote.html", null ],
+      [ "fa::promote< T, T >", "structfa_1_1promote_3_01_t_00_01_t_01_4.html", null ],
+      [ "fa::term< T >", "structfa_1_1term.html", null ],
+      [ "fa::term< FastArray >", "structfa_1_1term_3_01_fast_array_01_4.html", null ],
+      [ "fa::term< ScalarT >", "structfa_1_1term_3_01_scalar_t_01_4.html", null ]
     ] ],
     [ "Class Index", "classes.html", null ],
     [ "File List", "files.html", [
