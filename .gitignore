@@ -6,6 +6,10 @@
 *.a
 *.dylib
 build
+gcc-4.4.4
+gcc-4.4.6
+gcc-4.5.3
+intel-11.1
 CMakeFiles
 CMakeCache
 CMakeCache.txt
