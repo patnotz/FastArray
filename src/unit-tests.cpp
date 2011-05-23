@@ -359,7 +359,7 @@ TEST(FastArray, plus_double)
   }
 }
 
-TEST(FastArray, complex_binop)
+TEST(FastArray, several_binop)
 {
   const fa::IndexT size = 1000;
   const fa::ScalarT a = 3;
@@ -474,4 +474,27 @@ TEST_STD_MATH_BINARY(math_atan2_a, atan2, 2, 3, fa, fb);
 TEST_STD_MATH_BINARY(math_atan2_c, atan2, 2, 3, fa, b);
 #undef TEST_STD_MATH_BINARY
 
+TEST(FastArray, kitchen_sink)
+{
+  const fa::IndexT size = 1000;
+  const fa::ScalarT a = 3;
+  const fa::ScalarT b = 5;
+  const fa::ScalarT c = 7;
+  const fa::ScalarT d = 11;
+  const fa::ScalarT e = 13;
+
+  fa::FastArray fa(size,a);
+  fa::FastArray fb(size,b);
+  fa::FastArray fc(size,c);
+  fa::FastArray fd(size,d);
+
+  const fa::ScalarT f = log10(exp(a) + cos(b) * pow(c,2.5) / (-d + e));
+  fa::FastArray ff(size);
+  ff = log10(exp(fa) + cos(fb) * pow(fc,2.5) / (-fd + e));
+
+  ASSERT_EQ(size,ff.size());
+  for(int i=0; i < size; ++i) {
+    ASSERT_DOUBLE_EQ(f, ff[i]);
+  }
+}
 
