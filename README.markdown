@@ -23,6 +23,8 @@
 
 ## TODO
  - Pretty much everything
- - Expression Templates involving raw scalar types, like `double * FastArray` 
- - Debug error checking
+ - Capacity vs. size
+ - Debug error checking (size compatibility, bounds checking)
+ - Resize method
  - Math and Trig functions
+ - Unary ops
