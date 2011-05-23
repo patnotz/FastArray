@@ -94,14 +94,18 @@ Public Types</h2></td></tr>
 typedef ScalarT&#160;</td><td class="memItemRight" valign="bottom"><b>ValueT</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab588cdcaca5ab88b5b0f0c4babf44adf"></a><!-- doxytag: member="fa::FastArray::FastArray" ref="ab588cdcaca5ab88b5b0f0c4babf44adf" args="(const IndexT size)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>FastArray</b> (const IndexT size)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b7807f764ec6c80077191080a9814e0"></a><!-- doxytag: member="fa::FastArray::FastArray" ref="a5b7807f764ec6c80077191080a9814e0" args="(const IndexT size, const ScalarT val)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>FastArray</b> (const IndexT size, const ScalarT val)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b21925c8e8727a3479aee99d0c06a49"></a><!-- doxytag: member="fa::FastArray::FastArray" ref="a2b21925c8e8727a3479aee99d0c06a49" args="(const IndexT initial_size)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>FastArray</b> (const IndexT initial_size)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af34f5cecf4214e783567d7aaa3917cf8"></a><!-- doxytag: member="fa::FastArray::FastArray" ref="af34f5cecf4214e783567d7aaa3917cf8" args="(const IndexT initial_size, const ScalarT val)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>FastArray</b> (const IndexT initial_size, const ScalarT val)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5ad69a118a76f9c39e1b405329b7d47"></a><!-- doxytag: member="fa::FastArray::FastArray" ref="ad5ad69a118a76f9c39e1b405329b7d47" args="(const FastArray &amp;other)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>FastArray</b> (const <a class="el" href="structfa_1_1_fast_array.html">FastArray</a> &amp;other)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a0258486e14cfdcc9b00c3410b981e3"></a><!-- doxytag: member="fa::FastArray::operator=" ref="a7a0258486e14cfdcc9b00c3410b981e3" args="(const FastArray &amp;other)" -->
 <a class="el" href="structfa_1_1_fast_array.html">FastArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="structfa_1_1_fast_array.html">FastArray</a> &amp;other)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab99c239f37e2ffb3274e2caca331ce73"></a><!-- doxytag: member="fa::FastArray::resize" ref="ab99c239f37e2ffb3274e2caca331ce73" args="(const IndexT new_size)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (const IndexT new_size)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a84aeb159c2ee7ef0cc69b2fe1a4185f7"></a><!-- doxytag: member="fa::FastArray::set_all" ref="a84aeb159c2ee7ef0cc69b2fe1a4185f7" args="(const ScalarT &amp;value)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_all</b> (const ScalarT &amp;value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af674e15e6e1ad8012ac848efed75303a"></a><!-- doxytag: member="fa::FastArray::operator=" ref="af674e15e6e1ad8012ac848efed75303a" args="(const ScalarT &amp;value)" -->
 <a class="el" href="structfa_1_1_fast_array.html">FastArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const ScalarT &amp;value)</td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="aaa471bde9751a78c45d80fa968c417e6"></a><!-- doxytag: member="fa::FastArray::operator=" ref="aaa471bde9751a78c45d80fa968c417e6" args="(const term&lt; T &gt; &amp;rhs)" -->
@@ -125,10 +129,12 @@ ScalarT &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</
 const ScalarT &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (const IndexT i) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adea08ced031fb1bc104bafd8eec292ab"></a><!-- doxytag: member="fa::FastArray::size" ref="adea08ced031fb1bc104bafd8eec292ab" args="() const " -->
 IndexT&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a760d15f9c4c898459442dd79d1fbe3d8"></a><!-- doxytag: member="fa::FastArray::capacity" ref="a760d15f9c4c898459442dd79d1fbe3d8" args="() const " -->
+IndexT&#160;</td><td class="memItemRight" valign="bottom"><b>capacity</b> () const </td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_fast_array_8hpp_source.html#l00057">57</a> of file <a class="el" href="_fast_array_8hpp_source.html">FastArray.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_array_8hpp_source.html#l00059">59</a> of file <a class="el" href="_fast_array_8hpp_source.html">FastArray.hpp</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="_fast_array_8hpp_source.html">FastArray.hpp</a></li>
 </ul>
@@ -138,7 +144,7 @@ IndexT&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const <
     <ul>
       <li class="navelem"><b>fa</b>      </li>
       <li class="navelem"><a class="el" href="structfa_1_1_fast_array.html">FastArray</a>      </li>
-      <li class="footer">Generated on Sun May 22 2011 22:57:32 for FastArray by&#160;
+      <li class="footer">Generated on Mon May 23 2011 12:48:58 for FastArray by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>
