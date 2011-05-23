@@ -75,7 +75,8 @@ struct FastArray {
     set_all(val);
   }
 
-  FastArray(const FastArray & other) {
+  FastArray(const FastArray & other) :
+    m_x(0), m_size(0), m_capacity(0) {
     resize(other.size());
     for(IndexT i=0; i < m_size; ++i)
       m_x[i] = other.m_x[i];
