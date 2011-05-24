@@ -6,7 +6,7 @@
 namespace fa {
 
 typedef double ScalarT;
-typedef unsigned IndexT;
+typedef int IndexT;
 
 //
 // Type promotion -- helper template for deducing
