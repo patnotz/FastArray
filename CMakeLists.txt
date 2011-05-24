@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 2.6)
 
-# HACK:
-add_definitions("-g -O3")
+PROJECT(FastArray CXX C)
 
-PROJECT(FastArray)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3")
+
+find_package(Threads)
+if (CMAKE_USE_PTHREADS_INIT)  # The pthreads library is available and allowed.
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGTEST_HAS_PTHREAD=1")
+else()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGTEST_HAS_PTHREAD=0")
+endif()
 
 ################################################################################
 # GTest
@@ -20,5 +26,5 @@ enable_testing(true)
 ################################################################################
 include_directories(src ${GTEST_INCLUDE_DIRS})
 add_executable(unit-tests src/unit-tests.cpp)
-target_link_libraries(unit-tests gtest)
+target_link_libraries(unit-tests gtest ${CMAKE_THREAD_LIBS_INIT})
 add_test(unit-tests unit-tests)
