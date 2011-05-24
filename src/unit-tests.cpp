@@ -1,22 +1,24 @@
 #include <gtest/gtest.h>
 #include <FastArray.hpp>
 
+const fa::IndexT SIZE = 100000;
+
 // This test is mostly meant as a concise example of how to parse and access
 // Json data and to make sure the build is working. It's not meant to an
 // exhaustive test of the JsonCPP package.
 TEST(FastArray, resize)
 {
-  const fa::IndexT orig_size = 1000;
+  const fa::IndexT orig_size = SIZE;
   fa::FastArray fa(orig_size);
   ASSERT_EQ(orig_size,fa.size());
   ASSERT_EQ(orig_size,fa.capacity());
 
-  const fa::IndexT smaller_size = 500;
+  const fa::IndexT smaller_size = SIZE / 2;
   fa.resize(smaller_size);
   ASSERT_EQ(smaller_size,fa.size());
   ASSERT_EQ(orig_size,fa.capacity());
 
-  const fa::IndexT bigger_size = 2000;
+  const fa::IndexT bigger_size = SIZE * 2;
   fa.resize(bigger_size);
   ASSERT_EQ(bigger_size,fa.size());
   ASSERT_EQ(bigger_size,fa.capacity());
@@ -28,7 +30,7 @@ TEST(FastArray, resize)
 
 TEST(FastArray, operator_bracket)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   fa::FastArray fa(size);
   for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = double(i);
@@ -40,7 +42,7 @@ TEST(FastArray, operator_bracket)
 
 TEST(FastArray, ctor_size_val)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   fa::FastArray fb(size,a);
   ASSERT_EQ(size, fb.size());
@@ -51,7 +53,7 @@ TEST(FastArray, ctor_size_val)
 
 TEST(FastArray, set_all)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   fa::FastArray fb(size);
   fb = a;
@@ -63,7 +65,7 @@ TEST(FastArray, set_all)
 
 TEST(FastArray, copy_ctor)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   fa::FastArray fa(size);
   for(fa::IndexT i=0; i < size; ++i) {
@@ -80,7 +82,7 @@ TEST(FastArray, copy_ctor)
 
 TEST(FastArray, operator_equal)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   fa::FastArray fa(size);
   for(fa::IndexT i=0; i < size; ++i) {
@@ -98,14 +100,14 @@ TEST(FastArray, operator_equal)
 
 TEST(FastArray, operator_equal_with_different_size)
 {
-  const fa::IndexT a_size = 1000;
+  const fa::IndexT a_size = SIZE;
   const fa::ScalarT a = 3;
   fa::FastArray fa(a_size);
   for(fa::IndexT i=0; i < a_size; ++i) {
     fa[i] = a;
   }
 
-  const fa::IndexT b_size = 10;
+  const fa::IndexT b_size = SIZE / 10;
   fa::FastArray fb(b_size);
   fb = fa;
 
@@ -117,7 +119,7 @@ TEST(FastArray, operator_equal_with_different_size)
 
 TEST(FastArray, plus)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
 
@@ -139,7 +141,7 @@ TEST(FastArray, plus)
 
 TEST(FastArray, minus)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
 
@@ -160,7 +162,7 @@ TEST(FastArray, minus)
 
 TEST(FastArray, multiply)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
 
@@ -181,7 +183,7 @@ TEST(FastArray, multiply)
 
 TEST(FastArray, divide)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
 
@@ -202,7 +204,7 @@ TEST(FastArray, divide)
 
 TEST(FastArray, plus_plus)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
   const fa::ScalarT c = 11;
@@ -226,7 +228,7 @@ TEST(FastArray, plus_plus)
 
 TEST(FastArray, mult_plus)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
   const fa::ScalarT c = 11;
@@ -250,7 +252,7 @@ TEST(FastArray, mult_plus)
 
 TEST(FastArray, plus_equals)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
   fa::ScalarT c = 11;
@@ -273,7 +275,7 @@ TEST(FastArray, plus_equals)
 
 TEST(FastArray, minus_equals)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
   fa::ScalarT c = 11;
@@ -296,7 +298,7 @@ TEST(FastArray, minus_equals)
 
 TEST(FastArray, multiply_equals)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
   fa::ScalarT c = 11;
@@ -317,7 +319,7 @@ TEST(FastArray, multiply_equals)
 
 TEST(FastArray, divide_equals)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
   fa::ScalarT c = 11;
@@ -340,7 +342,7 @@ TEST(FastArray, divide_equals)
 
 TEST(FastArray, plus_double)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 4;
 
@@ -359,7 +361,7 @@ TEST(FastArray, plus_double)
 
 TEST(FastArray, several_binop)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 5;
   const fa::ScalarT c = 7;
@@ -383,7 +385,7 @@ TEST(FastArray, several_binop)
 
 TEST(FastArray, unary_minus)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
 
   fa::FastArray fa(size, a);
@@ -396,7 +398,7 @@ TEST(FastArray, unary_minus)
 
 TEST(FastArray, unary_plus)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
 
   fa::FastArray fa(size, a);
@@ -410,7 +412,7 @@ TEST(FastArray, unary_plus)
 #define TEST_STD_MATH_UNARY(TESTNAME, FCN, VAL) \
 TEST(FastArray, TESTNAME) \
 { \
-  const fa::IndexT size = 1000; \
+  const fa::IndexT size = SIZE; \
   const fa::ScalarT a = VAL; \
  \
   fa::FastArray fa(size, a); \
@@ -448,7 +450,7 @@ TEST_STD_MATH_UNARY(math_fabs_neg,fabs,-1.1);
 #define TEST_STD_MATH_BINARY(TESTNAME, FCN, VAL_A, VAL_B, OBJ_A, OBJ_B) \
 TEST(FastArray, TESTNAME) \
 { \
-  const fa::IndexT size = 1000; \
+  const fa::IndexT size = SIZE; \
   const fa::ScalarT a = VAL_A; \
   const fa::ScalarT b = VAL_B; \
  \
@@ -480,7 +482,7 @@ TEST_STD_MATH_BINARY(math_atan2_cc, atan2, 2, 3, a, b);
 
 TEST(FastArray, kitchen_sink)
 {
-  const fa::IndexT size = 1000;
+  const fa::IndexT size = SIZE;
   const fa::ScalarT a = 3;
   const fa::ScalarT b = 5;
   const fa::ScalarT c = 7;
