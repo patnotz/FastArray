@@ -304,11 +304,9 @@ TEST(FastArray, multiply_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(fa::IndexT i=0; i < size; ++i) {
-    fa[i] = a;
-    fb[i] = b;
-    fc[i] = c;
-  }
+  fa = a;
+  fb = b;
+  fc = c;
   c *= a + b;
   fc *= fa + fb;
 
