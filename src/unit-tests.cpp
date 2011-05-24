@@ -30,10 +30,10 @@ TEST(FastArray, operator_bracket)
 {
   const fa::IndexT size = 1000;
   fa::FastArray fa(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = double(i);
   }
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(double(i), fa[i]);
   }
 }
@@ -44,7 +44,7 @@ TEST(FastArray, ctor_size_val)
   const fa::ScalarT a = 3;
   fa::FastArray fb(size,a);
   ASSERT_EQ(size, fb.size());
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(a, fb[i]);
   }
 }
@@ -56,7 +56,7 @@ TEST(FastArray, set_all)
   fa::FastArray fb(size);
   fb = a;
   ASSERT_EQ(size, fb.size());
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(a, fb[i]);
   }
 }
@@ -66,14 +66,14 @@ TEST(FastArray, copy_ctor)
   const fa::IndexT size = 1000;
   const fa::ScalarT a = 3;
   fa::FastArray fa(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
   }
 
   fa::FastArray fb(fa);
 
   ASSERT_EQ(fa.size(), fb.size());
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(a, fb[i]);
   }
 }
@@ -83,7 +83,7 @@ TEST(FastArray, operator_equal)
   const fa::IndexT size = 1000;
   const fa::ScalarT a = 3;
   fa::FastArray fa(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
   }
 
@@ -91,7 +91,7 @@ TEST(FastArray, operator_equal)
   fb = fa;
 
   ASSERT_EQ(size, fb.size());
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(a, fb[i]);
   }
 }
@@ -101,7 +101,7 @@ TEST(FastArray, operator_equal_with_different_size)
   const fa::IndexT a_size = 1000;
   const fa::ScalarT a = 3;
   fa::FastArray fa(a_size);
-  for(int i=0; i < a_size; ++i) {
+  for(fa::IndexT i=0; i < a_size; ++i) {
     fa[i] = a;
   }
 
@@ -110,7 +110,7 @@ TEST(FastArray, operator_equal_with_different_size)
   fb = fa;
 
   ASSERT_EQ(a_size, fb.size());
-  for(int i=0; i < a_size; ++i) {
+  for(fa::IndexT i=0; i < a_size; ++i) {
     ASSERT_DOUBLE_EQ(a, fb[i]);
   }
 }
@@ -124,7 +124,7 @@ TEST(FastArray, plus)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
   }
@@ -132,7 +132,7 @@ TEST(FastArray, plus)
   const fa::ScalarT c = a + b;
   fc = fa + fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -146,14 +146,14 @@ TEST(FastArray, minus)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
   }
   const fa::ScalarT c = a - b;
   fc = fa - fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -167,14 +167,14 @@ TEST(FastArray, multiply)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
   }
   const fa::ScalarT c = a * b;
   fc = fa * fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -188,14 +188,14 @@ TEST(FastArray, divide)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
   }
   const fa::ScalarT c = a / b;
   fc = fa / fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -211,7 +211,7 @@ TEST(FastArray, plus_plus)
   fa::FastArray fb(size);
   fa::FastArray fc(size);
   fa::FastArray fd(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
     fc[i] = c;
@@ -219,7 +219,7 @@ TEST(FastArray, plus_plus)
   const fa::ScalarT d = a + b + c;
   fd = fa + fb + fc;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(d, fd[i]);
   }
 }
@@ -235,7 +235,7 @@ TEST(FastArray, mult_plus)
   fa::FastArray fb(size);
   fa::FastArray fc(size);
   fa::FastArray fd(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
     fc[i] = c;
@@ -243,7 +243,7 @@ TEST(FastArray, mult_plus)
   const fa::ScalarT d = a * (b + c);
   fd = fa * (fb + fc);
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(d, fd[i]);
   }
 }
@@ -258,7 +258,7 @@ TEST(FastArray, plus_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
     fc[i] = c;
@@ -266,7 +266,7 @@ TEST(FastArray, plus_equals)
   c += a + b;
   fc += fa + fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -281,7 +281,7 @@ TEST(FastArray, minus_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
     fc[i] = c;
@@ -289,7 +289,7 @@ TEST(FastArray, minus_equals)
   c -= a + b;
   fc -= fa + fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -304,7 +304,7 @@ TEST(FastArray, multiply_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
     fc[i] = c;
@@ -312,7 +312,7 @@ TEST(FastArray, multiply_equals)
   c *= a + b;
   fc *= fa + fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -327,7 +327,7 @@ TEST(FastArray, divide_equals)
   fa::FastArray fa(size);
   fa::FastArray fb(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
     fb[i] = b;
     fc[i] = c;
@@ -335,7 +335,7 @@ TEST(FastArray, divide_equals)
   c /= a + b;
   fc /= fa + fb;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -348,13 +348,13 @@ TEST(FastArray, plus_double)
 
   fa::FastArray fa(size);
   fa::FastArray fc(size);
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     fa[i] = a;
   }
   const fa::ScalarT c = a + b;
   fc = fa + b;
 
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(c, fc[i]);
   }
 }
@@ -378,7 +378,7 @@ TEST(FastArray, several_binop)
   ff = fa + fb * fc / (fd + e);
 
   ASSERT_EQ(size,ff.size());
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(f, ff[i]);
   }
 }
@@ -391,7 +391,7 @@ TEST(FastArray, unary_minus)
   fa::FastArray fa(size, a);
   fa::FastArray fb(size);
   fb = -fa;
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(-a, fb[i]);
   }
 }
@@ -404,7 +404,7 @@ TEST(FastArray, unary_plus)
   fa::FastArray fa(size, a);
   fa::FastArray fb(size);
   fb = +fa;
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(a, fb[i]);
   }
 }
@@ -420,7 +420,7 @@ TEST(FastArray, TESTNAME) \
   fb = FCN(fa); \
   const fa::ScalarT b = std::FCN(a); \
  \
-  for(int i=0; i < size; ++i) { \
+  for(fa::IndexT i=0; i < size; ++i) { \
     ASSERT_DOUBLE_EQ(b, fb[i]); \
   } \
 }
@@ -460,7 +460,7 @@ TEST(FastArray, TESTNAME) \
   fc = FCN(OBJ_A,OBJ_B); \
   const fa::ScalarT c = std::FCN(a,b); \
  \
-  for(int i=0; i < size; ++i) { \
+  for(fa::IndexT i=0; i < size; ++i) { \
     ASSERT_DOUBLE_EQ(c, fc[i]); \
   } \
 }
@@ -499,7 +499,7 @@ TEST(FastArray, kitchen_sink)
   ff = log10(exp(fa) + cos(fb) * pow(fc,2.5) / (-fd + e));
 
   ASSERT_EQ(size,ff.size());
-  for(int i=0; i < size; ++i) {
+  for(fa::IndexT i=0; i < size; ++i) {
     ASSERT_DOUBLE_EQ(f, ff[i]);
   }
 }
