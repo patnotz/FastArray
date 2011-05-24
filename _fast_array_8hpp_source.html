@@ -158,212 +158,213 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00075"></a>00075     set_all(val);
 <a name="l00076"></a>00076   }
 <a name="l00077"></a>00077 
-<a name="l00078"></a>00078   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a>(<span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; other) {
-<a name="l00079"></a>00079     resize(other.size());
-<a name="l00080"></a>00080     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00081"></a>00081       m_x[i] = other.m_x[i];
-<a name="l00082"></a>00082   }
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator=(<span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; other) {
-<a name="l00085"></a>00085     <span class="keywordflow">if</span>(<span class="keyword">this</span> == &amp;other)
-<a name="l00086"></a>00086       <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00087"></a>00087     resize(other.size());
-<a name="l00088"></a>00088     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00089"></a>00089       m_x[i] = other.m_x[i];
-<a name="l00090"></a>00090     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00091"></a>00091   }
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093   ~<a class="code" href="structfa_1_1_fast_array.html">FastArray</a>() {
-<a name="l00094"></a>00094     <span class="keywordflow">if</span> ( m_x != 0 ) <span class="keyword">delete</span>[] m_x;
-<a name="l00095"></a>00095   }
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097   <span class="keywordtype">void</span> resize(<span class="keyword">const</span> IndexT new_size) {
-<a name="l00098"></a>00098     <span class="keywordflow">if</span> ( m_capacity &gt;= new_size ) {
-<a name="l00099"></a>00099       <span class="comment">// no need to re-allocate</span>
-<a name="l00100"></a>00100       m_size = new_size;
-<a name="l00101"></a>00101       <span class="keywordflow">return</span>;
-<a name="l00102"></a>00102     }
-<a name="l00103"></a>00103     <span class="comment">// if we&#39;re here, then m_capacity (and m_size) &lt; new_size</span>
-<a name="l00104"></a>00104     <span class="keywordflow">if</span> ( m_x != 0 )
-<a name="l00105"></a>00105       <span class="keyword">delete</span>[] m_x;
-<a name="l00106"></a>00106     m_size = new_size;
-<a name="l00107"></a>00107     m_capacity = new_size;
-<a name="l00108"></a>00108     m_x = <span class="keyword">new</span> ScalarT[m_capacity];
-<a name="l00109"></a>00109     <span class="comment">// not initialized for efficiency</span>
-<a name="l00110"></a>00110   }
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112   <span class="keywordtype">void</span> set_all(<span class="keyword">const</span> ScalarT &amp; value) {
-<a name="l00113"></a>00113     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00114"></a>00114       m_x[i] = value;
-<a name="l00115"></a>00115   }
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator=(<span class="keyword">const</span> ScalarT &amp; value) {
-<a name="l00118"></a>00118     set_all(value);
-<a name="l00119"></a>00119     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00120"></a>00120   }
-<a name="l00121"></a>00121 
-<a name="l00122"></a>00122   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<a name="l00123"></a>00123   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
-<a name="l00124"></a>00124     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00125"></a>00125       m_x[i] = rhs[i];
-<a name="l00126"></a>00126     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00127"></a>00127   }
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<a name="l00130"></a>00130   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator+=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
-<a name="l00131"></a>00131     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00132"></a>00132       m_x[i] += rhs[i];
-<a name="l00133"></a>00133     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00134"></a>00134   }
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<a name="l00137"></a>00137   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator-=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
-<a name="l00138"></a>00138     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00139"></a>00139       m_x[i] -= rhs[i];
-<a name="l00140"></a>00140     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00141"></a>00141   }
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<a name="l00144"></a>00144   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator*=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
-<a name="l00145"></a>00145     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00146"></a>00146       m_x[i] *= rhs[i];
-<a name="l00147"></a>00147     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00148"></a>00148   }
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<a name="l00151"></a>00151   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator/=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
-<a name="l00152"></a>00152     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
-<a name="l00153"></a>00153       m_x[i] /= rhs[i];
-<a name="l00154"></a>00154     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00155"></a>00155   }
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157   ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i) {
-<a name="l00158"></a>00158     <span class="keywordflow">return</span> m_x[i];
-<a name="l00159"></a>00159   }
-<a name="l00160"></a>00160   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i)<span class="keyword"> const </span>{
-<a name="l00161"></a>00161     <span class="keywordflow">return</span> m_x[i];
-<a name="l00162"></a>00162   }
-<a name="l00163"></a>00163   IndexT size()<span class="keyword"> const </span>{
-<a name="l00164"></a>00164     <span class="keywordflow">return</span> m_size;
-<a name="l00165"></a>00165   }
-<a name="l00166"></a>00166   IndexT capacity()<span class="keyword"> const </span>{
-<a name="l00167"></a>00167     <span class="keywordflow">return</span> m_capacity;
-<a name="l00168"></a>00168   }
-<a name="l00169"></a>00169 <span class="keyword">private</span>:
-<a name="l00170"></a>00170   ScalarT * m_x;
-<a name="l00171"></a>00171   IndexT m_size;
-<a name="l00172"></a>00172   IndexT m_capacity;
-<a name="l00173"></a>00173 };
-<a name="l00174"></a>00174 
-<a name="l00175"></a>00175 <span class="keyword">template</span> &lt;&gt;
-<a name="l00176"></a><a class="code" href="structfa_1_1term_3_01_fast_array_01_4.html">00176</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1term.html">term</a>&lt;<a class="code" href="structfa_1_1_fast_array.html">FastArray</a>&gt; {
-<a name="l00177"></a>00177   <span class="keyword">typedef</span> <a class="code" href="structfa_1_1term_3_01_fast_array_01_4.html">term&lt;FastArray&gt;</a> <a class="code" href="structfa_1_1term_3_01_fast_array_01_4.html">TermT</a>;
-<a name="l00178"></a>00178   <span class="keyword">typedef</span> ScalarT ValueT;
-<a name="l00179"></a>00179   <span class="comment">// implicit constructor</span>
-<a name="l00180"></a>00180   <a class="code" href="structfa_1_1term.html">term</a>(<span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; fa) : m_fa(fa) {}
-<a name="l00181"></a>00181   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i)<span class="keyword"> const </span>{
-<a name="l00182"></a>00182     <span class="keywordflow">return</span> m_fa[i];
-<a name="l00183"></a>00183   }
-<a name="l00184"></a>00184   <span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; m_fa;
-<a name="l00185"></a>00185 };
-<a name="l00186"></a>00186 
-<a name="l00187"></a>00187 <span class="keyword">template</span> &lt;&gt;
-<a name="l00188"></a><a class="code" href="structfa_1_1term_3_01_scalar_t_01_4.html">00188</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1term.html">term</a>&lt;ScalarT&gt; {
-<a name="l00189"></a>00189   <span class="keyword">typedef</span> <a class="code" href="structfa_1_1term_3_01_scalar_t_01_4.html">term&lt;ScalarT&gt;</a> <a class="code" href="structfa_1_1term_3_01_scalar_t_01_4.html">TermT</a>;
-<a name="l00190"></a>00190   <span class="keyword">typedef</span> ScalarT ValueT;
-<a name="l00191"></a>00191   <span class="comment">// implicit constructor</span>
-<a name="l00192"></a>00192   <a class="code" href="structfa_1_1term.html">term</a>(<span class="keyword">const</span> ScalarT c) : m_c(c) {}
-<a name="l00193"></a>00193   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT)<span class="keyword"> const </span>{
-<a name="l00194"></a>00194     <span class="keywordflow">return</span> m_c;
-<a name="l00195"></a>00195   }
-<a name="l00196"></a>00196   <span class="keyword">const</span> ScalarT m_c;
-<a name="l00197"></a>00197 };
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199 <span class="preprocessor">#define FA_BINARY_OP(LABEL,OPERATOR,EXPR) \</span>
-<a name="l00200"></a>00200 <span class="preprocessor">template &lt;class L, class R&gt; struct LABEL {}; \</span>
-<a name="l00201"></a>00201 <span class="preprocessor">\</span>
-<a name="l00202"></a>00202 <span class="preprocessor">template &lt;class L, class R&gt; \</span>
-<a name="l00203"></a>00203 <span class="preprocessor">struct term&lt; LABEL&lt; term&lt;L&gt;, term&lt;R&gt; &gt; &gt; { \</span>
-<a name="l00204"></a>00204 <span class="preprocessor">  typedef term&lt;L&gt; TermL; \</span>
-<a name="l00205"></a>00205 <span class="preprocessor">  typedef term&lt;R&gt; TermR; \</span>
-<a name="l00206"></a>00206 <span class="preprocessor">  typedef typename TermL::ValueT ValueTL; \</span>
-<a name="l00207"></a>00207 <span class="preprocessor">  typedef typename TermR::ValueT ValueTR; \</span>
-<a name="l00208"></a>00208 <span class="preprocessor">  typedef typename promote&lt;ValueTL,ValueTR&gt;::type ValueT; \</span>
-<a name="l00209"></a>00209 <span class="preprocessor">  term(const term&lt;L&gt; &amp; left, const term&lt;R&gt; &amp; right) : \</span>
-<a name="l00210"></a>00210 <span class="preprocessor">    m_left(left), m_right(right) {} \</span>
-<a name="l00211"></a>00211 <span class="preprocessor">  ValueT operator[](const IndexT i) const { \</span>
-<a name="l00212"></a>00212 <span class="preprocessor">    return EXPR; \</span>
-<a name="l00213"></a>00213 <span class="preprocessor">  } \</span>
-<a name="l00214"></a>00214 <span class="preprocessor">  const term&lt;L&gt; m_left; \</span>
-<a name="l00215"></a>00215 <span class="preprocessor">  const term&lt;R&gt; m_right; \</span>
-<a name="l00216"></a>00216 <span class="preprocessor">}; \</span>
-<a name="l00217"></a>00217 <span class="preprocessor">\</span>
-<a name="l00218"></a>00218 <span class="preprocessor">template &lt;class L, class R&gt; \</span>
-<a name="l00219"></a>00219 <span class="preprocessor">inline term&lt; LABEL&lt; term&lt;L&gt;, term&lt;R&gt; &gt; &gt; \</span>
-<a name="l00220"></a>00220 <span class="preprocessor">OPERATOR(const L &amp; left, const R &amp; right) { \</span>
-<a name="l00221"></a>00221 <span class="preprocessor">  typedef LABEL&lt; term&lt;L&gt;, term&lt;R&gt; &gt; TermT; \</span>
-<a name="l00222"></a>00222 <span class="preprocessor">  return term&lt;TermT&gt;(left,right); \</span>
-<a name="l00223"></a>00223 <span class="preprocessor">}</span>
-<a name="l00224"></a>00224 <span class="preprocessor"></span>
-<a name="l00225"></a>00225 FA_BINARY_OP(addition,       <span class="keyword">operator</span>+, m_left[i] + m_right[i]);
-<a name="l00226"></a>00226 FA_BINARY_OP(subtraction,    <span class="keyword">operator</span>-, m_left[i] - m_right[i]);
-<a name="l00227"></a>00227 FA_BINARY_OP(mulitiplication,<span class="keyword">operator</span>*, m_left[i] * m_right[i]);
-<a name="l00228"></a>00228 FA_BINARY_OP(division,       <span class="keyword">operator</span>/, m_left[i] / m_right[i]);
-<a name="l00229"></a>00229 FA_BINARY_OP(math_pow,       pow, std::pow(m_left[i], m_right[i]));
-<a name="l00230"></a>00230 FA_BINARY_OP(math_max,       max, std::max(m_left[i], m_right[i]));
-<a name="l00231"></a>00231 FA_BINARY_OP(math_min,       min, std::min(m_left[i], m_right[i]));
-<a name="l00232"></a>00232 FA_BINARY_OP(math_atan2,     atan2, std::atan2(m_left[i], m_right[i]));
-<a name="l00233"></a>00233 <span class="preprocessor">#undef FA_BINARY_OP</span>
-<a name="l00234"></a>00234 <span class="preprocessor"></span>
-<a name="l00235"></a>00235 <span class="preprocessor">#define FA_UNARY_OP(LABEL,OPERATOR,EXPR) \</span>
-<a name="l00236"></a>00236 <span class="preprocessor">template &lt;class T&gt; struct LABEL {}; \</span>
-<a name="l00237"></a>00237 <span class="preprocessor">\</span>
-<a name="l00238"></a>00238 <span class="preprocessor">template &lt;class T&gt; \</span>
-<a name="l00239"></a>00239 <span class="preprocessor">struct term&lt; LABEL&lt; term&lt;T&gt; &gt; &gt; { \</span>
-<a name="l00240"></a>00240 <span class="preprocessor">  typedef term&lt;T&gt; TermT; \</span>
-<a name="l00241"></a>00241 <span class="preprocessor">  typedef typename TermT::ValueT ValueT; \</span>
-<a name="l00242"></a>00242 <span class="preprocessor">  term(const term&lt;T&gt; &amp; t) : m_t(t) {} \</span>
-<a name="l00243"></a>00243 <span class="preprocessor">  ValueT operator[](const IndexT i) const { \</span>
-<a name="l00244"></a>00244 <span class="preprocessor">    return EXPR; \</span>
-<a name="l00245"></a>00245 <span class="preprocessor">  } \</span>
-<a name="l00246"></a>00246 <span class="preprocessor">  const term&lt;T&gt; m_t; \</span>
-<a name="l00247"></a>00247 <span class="preprocessor">}; \</span>
-<a name="l00248"></a>00248 <span class="preprocessor">\</span>
-<a name="l00249"></a>00249 <span class="preprocessor">template &lt;class T&gt; \</span>
-<a name="l00250"></a>00250 <span class="preprocessor">inline term&lt; LABEL&lt; term&lt;T&gt; &gt; &gt; \</span>
-<a name="l00251"></a>00251 <span class="preprocessor">OPERATOR(const T &amp; t) { \</span>
-<a name="l00252"></a>00252 <span class="preprocessor">  typedef LABEL&lt; term&lt;T&gt; &gt; TermT; \</span>
-<a name="l00253"></a>00253 <span class="preprocessor">  return term&lt;TermT&gt;(t); \</span>
-<a name="l00254"></a>00254 <span class="preprocessor">}</span>
-<a name="l00255"></a>00255 <span class="preprocessor"></span>
-<a name="l00256"></a>00256 FA_UNARY_OP(unary_minus, <span class="keyword">operator</span>-, -m_t[i]);
-<a name="l00257"></a>00257 FA_UNARY_OP(unary_plus,  <span class="keyword">operator</span>+, m_t[i]);
-<a name="l00258"></a>00258 FA_UNARY_OP(math_exp,    exp, std::exp(m_t[i]));
-<a name="l00259"></a>00259 FA_UNARY_OP(math_log,    log, std::log(m_t[i]));
-<a name="l00260"></a>00260 FA_UNARY_OP(math_log10,  log10, std::log10(m_t[i]));
-<a name="l00261"></a>00261 FA_UNARY_OP(math_sqrt,   sqrt, std::sqrt(m_t[i]));
-<a name="l00262"></a>00262 FA_UNARY_OP(math_cos,    cos, std::cos(m_t[i]));
-<a name="l00263"></a>00263 FA_UNARY_OP(math_sin,    sin, std::sin(m_t[i]));
-<a name="l00264"></a>00264 FA_UNARY_OP(math_tan,    tan, std::tan(m_t[i]));
-<a name="l00265"></a>00265 FA_UNARY_OP(math_acos,   acos, std::acos(m_t[i]));
-<a name="l00266"></a>00266 FA_UNARY_OP(math_asin,   asin, std::asin(m_t[i]));
-<a name="l00267"></a>00267 FA_UNARY_OP(math_atan,   atan, std::atan(m_t[i]));
-<a name="l00268"></a>00268 FA_UNARY_OP(math_cosh,   cosh, std::cosh(m_t[i]));
-<a name="l00269"></a>00269 FA_UNARY_OP(math_sinh,   sinh, std::sinh(m_t[i]));
-<a name="l00270"></a>00270 FA_UNARY_OP(math_tanh,   tanh, std::tanh(m_t[i]));
-<a name="l00271"></a>00271 FA_UNARY_OP(math_abs,    abs, std::abs(m_t[i]));
-<a name="l00272"></a>00272 FA_UNARY_OP(math_fabs,   fabs, std::fabs(m_t[i]));
-<a name="l00273"></a>00273 <span class="preprocessor">#undef FA_UNARY_OP</span>
-<a name="l00274"></a>00274 <span class="preprocessor"></span>
-<a name="l00275"></a>00275 } <span class="comment">// namespace fa</span>
-<a name="l00276"></a>00276 
-<a name="l00277"></a>00277 <span class="preprocessor">#endif // FASTARRAY_HPP_</span>
+<a name="l00078"></a>00078   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a>(<span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; other) :
+<a name="l00079"></a>00079     m_x(0), m_size(0), m_capacity(0) {
+<a name="l00080"></a>00080     resize(other.size());
+<a name="l00081"></a>00081     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00082"></a>00082       m_x[i] = other.m_x[i];
+<a name="l00083"></a>00083   }
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator=(<span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; other) {
+<a name="l00086"></a>00086     <span class="keywordflow">if</span>(<span class="keyword">this</span> == &amp;other)
+<a name="l00087"></a>00087       <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00088"></a>00088     resize(other.size());
+<a name="l00089"></a>00089     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00090"></a>00090       m_x[i] = other.m_x[i];
+<a name="l00091"></a>00091     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00092"></a>00092   }
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094   ~<a class="code" href="structfa_1_1_fast_array.html">FastArray</a>() {
+<a name="l00095"></a>00095     <span class="keywordflow">if</span> ( m_x != 0 ) <span class="keyword">delete</span>[] m_x;
+<a name="l00096"></a>00096   }
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098   <span class="keywordtype">void</span> resize(<span class="keyword">const</span> IndexT new_size) {
+<a name="l00099"></a>00099     <span class="keywordflow">if</span> ( m_capacity &gt;= new_size ) {
+<a name="l00100"></a>00100       <span class="comment">// no need to re-allocate</span>
+<a name="l00101"></a>00101       m_size = new_size;
+<a name="l00102"></a>00102       <span class="keywordflow">return</span>;
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104     <span class="comment">// if we&#39;re here, then m_capacity (and m_size) &lt; new_size</span>
+<a name="l00105"></a>00105     <span class="keywordflow">if</span> ( m_x != 0 )
+<a name="l00106"></a>00106       <span class="keyword">delete</span>[] m_x;
+<a name="l00107"></a>00107     m_size = new_size;
+<a name="l00108"></a>00108     m_capacity = new_size;
+<a name="l00109"></a>00109     m_x = <span class="keyword">new</span> ScalarT[m_capacity];
+<a name="l00110"></a>00110     <span class="comment">// not initialized for efficiency</span>
+<a name="l00111"></a>00111   }
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113   <span class="keywordtype">void</span> set_all(<span class="keyword">const</span> ScalarT &amp; value) {
+<a name="l00114"></a>00114     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00115"></a>00115       m_x[i] = value;
+<a name="l00116"></a>00116   }
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator=(<span class="keyword">const</span> ScalarT &amp; value) {
+<a name="l00119"></a>00119     set_all(value);
+<a name="l00120"></a>00120     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00121"></a>00121   }
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
+<a name="l00124"></a>00124   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
+<a name="l00125"></a>00125     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00126"></a>00126       m_x[i] = rhs[i];
+<a name="l00127"></a>00127     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00128"></a>00128   }
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
+<a name="l00131"></a>00131   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator+=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
+<a name="l00132"></a>00132     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00133"></a>00133       m_x[i] += rhs[i];
+<a name="l00134"></a>00134     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00135"></a>00135   }
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
+<a name="l00138"></a>00138   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator-=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
+<a name="l00139"></a>00139     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00140"></a>00140       m_x[i] -= rhs[i];
+<a name="l00141"></a>00141     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00142"></a>00142   }
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
+<a name="l00145"></a>00145   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator*=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
+<a name="l00146"></a>00146     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00147"></a>00147       m_x[i] *= rhs[i];
+<a name="l00148"></a>00148     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00149"></a>00149   }
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151   <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
+<a name="l00152"></a>00152   <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; operator/=(<span class="keyword">const</span> <a class="code" href="structfa_1_1term.html">term&lt;T&gt;</a> &amp; rhs) {
+<a name="l00153"></a>00153     <span class="keywordflow">for</span>(IndexT i=0; i &lt; m_size; ++i)
+<a name="l00154"></a>00154       m_x[i] /= rhs[i];
+<a name="l00155"></a>00155     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00156"></a>00156   }
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158   ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i) {
+<a name="l00159"></a>00159     <span class="keywordflow">return</span> m_x[i];
+<a name="l00160"></a>00160   }
+<a name="l00161"></a>00161   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i)<span class="keyword"> const </span>{
+<a name="l00162"></a>00162     <span class="keywordflow">return</span> m_x[i];
+<a name="l00163"></a>00163   }
+<a name="l00164"></a>00164   IndexT size()<span class="keyword"> const </span>{
+<a name="l00165"></a>00165     <span class="keywordflow">return</span> m_size;
+<a name="l00166"></a>00166   }
+<a name="l00167"></a>00167   IndexT capacity()<span class="keyword"> const </span>{
+<a name="l00168"></a>00168     <span class="keywordflow">return</span> m_capacity;
+<a name="l00169"></a>00169   }
+<a name="l00170"></a>00170 <span class="keyword">private</span>:
+<a name="l00171"></a>00171   ScalarT * m_x;
+<a name="l00172"></a>00172   IndexT m_size;
+<a name="l00173"></a>00173   IndexT m_capacity;
+<a name="l00174"></a>00174 };
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176 <span class="keyword">template</span> &lt;&gt;
+<a name="l00177"></a><a class="code" href="structfa_1_1term_3_01_fast_array_01_4.html">00177</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1term.html">term</a>&lt;<a class="code" href="structfa_1_1_fast_array.html">FastArray</a>&gt; {
+<a name="l00178"></a>00178   <span class="keyword">typedef</span> <a class="code" href="structfa_1_1term_3_01_fast_array_01_4.html">term&lt;FastArray&gt;</a> <a class="code" href="structfa_1_1term_3_01_fast_array_01_4.html">TermT</a>;
+<a name="l00179"></a>00179   <span class="keyword">typedef</span> ScalarT ValueT;
+<a name="l00180"></a>00180   <span class="comment">// implicit constructor</span>
+<a name="l00181"></a>00181   <a class="code" href="structfa_1_1term.html">term</a>(<span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; fa) : m_fa(fa) {}
+<a name="l00182"></a>00182   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT i)<span class="keyword"> const </span>{
+<a name="l00183"></a>00183     <span class="keywordflow">return</span> m_fa[i];
+<a name="l00184"></a>00184   }
+<a name="l00185"></a>00185   <span class="keyword">const</span> <a class="code" href="structfa_1_1_fast_array.html">FastArray</a> &amp; m_fa;
+<a name="l00186"></a>00186 };
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188 <span class="keyword">template</span> &lt;&gt;
+<a name="l00189"></a><a class="code" href="structfa_1_1term_3_01_scalar_t_01_4.html">00189</a> <span class="keyword">struct </span><a class="code" href="structfa_1_1term.html">term</a>&lt;ScalarT&gt; {
+<a name="l00190"></a>00190   <span class="keyword">typedef</span> <a class="code" href="structfa_1_1term_3_01_scalar_t_01_4.html">term&lt;ScalarT&gt;</a> <a class="code" href="structfa_1_1term_3_01_scalar_t_01_4.html">TermT</a>;
+<a name="l00191"></a>00191   <span class="keyword">typedef</span> ScalarT ValueT;
+<a name="l00192"></a>00192   <span class="comment">// implicit constructor</span>
+<a name="l00193"></a>00193   <a class="code" href="structfa_1_1term.html">term</a>(<span class="keyword">const</span> ScalarT c) : m_c(c) {}
+<a name="l00194"></a>00194   <span class="keyword">const</span> ScalarT &amp; operator[](<span class="keyword">const</span> IndexT)<span class="keyword"> const </span>{
+<a name="l00195"></a>00195     <span class="keywordflow">return</span> m_c;
+<a name="l00196"></a>00196   }
+<a name="l00197"></a>00197   <span class="keyword">const</span> ScalarT m_c;
+<a name="l00198"></a>00198 };
+<a name="l00199"></a>00199 
+<a name="l00200"></a>00200 <span class="preprocessor">#define FA_BINARY_OP(LABEL,OPERATOR,EXPR) \</span>
+<a name="l00201"></a>00201 <span class="preprocessor">template &lt;class L, class R&gt; struct LABEL {}; \</span>
+<a name="l00202"></a>00202 <span class="preprocessor">\</span>
+<a name="l00203"></a>00203 <span class="preprocessor">template &lt;class L, class R&gt; \</span>
+<a name="l00204"></a>00204 <span class="preprocessor">struct term&lt; LABEL&lt; term&lt;L&gt;, term&lt;R&gt; &gt; &gt; { \</span>
+<a name="l00205"></a>00205 <span class="preprocessor">  typedef term&lt;L&gt; TermL; \</span>
+<a name="l00206"></a>00206 <span class="preprocessor">  typedef term&lt;R&gt; TermR; \</span>
+<a name="l00207"></a>00207 <span class="preprocessor">  typedef typename TermL::ValueT ValueTL; \</span>
+<a name="l00208"></a>00208 <span class="preprocessor">  typedef typename TermR::ValueT ValueTR; \</span>
+<a name="l00209"></a>00209 <span class="preprocessor">  typedef typename promote&lt;ValueTL,ValueTR&gt;::type ValueT; \</span>
+<a name="l00210"></a>00210 <span class="preprocessor">  term(const term&lt;L&gt; &amp; left, const term&lt;R&gt; &amp; right) : \</span>
+<a name="l00211"></a>00211 <span class="preprocessor">    m_left(left), m_right(right) {} \</span>
+<a name="l00212"></a>00212 <span class="preprocessor">  ValueT operator[](const IndexT i) const { \</span>
+<a name="l00213"></a>00213 <span class="preprocessor">    return EXPR; \</span>
+<a name="l00214"></a>00214 <span class="preprocessor">  } \</span>
+<a name="l00215"></a>00215 <span class="preprocessor">  const term&lt;L&gt; m_left; \</span>
+<a name="l00216"></a>00216 <span class="preprocessor">  const term&lt;R&gt; m_right; \</span>
+<a name="l00217"></a>00217 <span class="preprocessor">}; \</span>
+<a name="l00218"></a>00218 <span class="preprocessor">\</span>
+<a name="l00219"></a>00219 <span class="preprocessor">template &lt;class L, class R&gt; \</span>
+<a name="l00220"></a>00220 <span class="preprocessor">inline term&lt; LABEL&lt; term&lt;L&gt;, term&lt;R&gt; &gt; &gt; \</span>
+<a name="l00221"></a>00221 <span class="preprocessor">OPERATOR(const L &amp; left, const R &amp; right) { \</span>
+<a name="l00222"></a>00222 <span class="preprocessor">  typedef LABEL&lt; term&lt;L&gt;, term&lt;R&gt; &gt; TermT; \</span>
+<a name="l00223"></a>00223 <span class="preprocessor">  return term&lt;TermT&gt;(left,right); \</span>
+<a name="l00224"></a>00224 <span class="preprocessor">}</span>
+<a name="l00225"></a>00225 <span class="preprocessor"></span>
+<a name="l00226"></a>00226 FA_BINARY_OP(addition,       <span class="keyword">operator</span>+, m_left[i] + m_right[i]);
+<a name="l00227"></a>00227 FA_BINARY_OP(subtraction,    <span class="keyword">operator</span>-, m_left[i] - m_right[i]);
+<a name="l00228"></a>00228 FA_BINARY_OP(mulitiplication,<span class="keyword">operator</span>*, m_left[i] * m_right[i]);
+<a name="l00229"></a>00229 FA_BINARY_OP(division,       <span class="keyword">operator</span>/, m_left[i] / m_right[i]);
+<a name="l00230"></a>00230 FA_BINARY_OP(math_pow,       pow, std::pow(m_left[i], m_right[i]));
+<a name="l00231"></a>00231 FA_BINARY_OP(math_max,       max, std::max(m_left[i], m_right[i]));
+<a name="l00232"></a>00232 FA_BINARY_OP(math_min,       min, std::min(m_left[i], m_right[i]));
+<a name="l00233"></a>00233 FA_BINARY_OP(math_atan2,     atan2, std::atan2(m_left[i], m_right[i]));
+<a name="l00234"></a>00234 <span class="preprocessor">#undef FA_BINARY_OP</span>
+<a name="l00235"></a>00235 <span class="preprocessor"></span>
+<a name="l00236"></a>00236 <span class="preprocessor">#define FA_UNARY_OP(LABEL,OPERATOR,EXPR) \</span>
+<a name="l00237"></a>00237 <span class="preprocessor">template &lt;class T&gt; struct LABEL {}; \</span>
+<a name="l00238"></a>00238 <span class="preprocessor">\</span>
+<a name="l00239"></a>00239 <span class="preprocessor">template &lt;class T&gt; \</span>
+<a name="l00240"></a>00240 <span class="preprocessor">struct term&lt; LABEL&lt; term&lt;T&gt; &gt; &gt; { \</span>
+<a name="l00241"></a>00241 <span class="preprocessor">  typedef term&lt;T&gt; TermT; \</span>
+<a name="l00242"></a>00242 <span class="preprocessor">  typedef typename TermT::ValueT ValueT; \</span>
+<a name="l00243"></a>00243 <span class="preprocessor">  term(const term&lt;T&gt; &amp; t) : m_t(t) {} \</span>
+<a name="l00244"></a>00244 <span class="preprocessor">  ValueT operator[](const IndexT i) const { \</span>
+<a name="l00245"></a>00245 <span class="preprocessor">    return EXPR; \</span>
+<a name="l00246"></a>00246 <span class="preprocessor">  } \</span>
+<a name="l00247"></a>00247 <span class="preprocessor">  const term&lt;T&gt; m_t; \</span>
+<a name="l00248"></a>00248 <span class="preprocessor">}; \</span>
+<a name="l00249"></a>00249 <span class="preprocessor">\</span>
+<a name="l00250"></a>00250 <span class="preprocessor">template &lt;class T&gt; \</span>
+<a name="l00251"></a>00251 <span class="preprocessor">inline term&lt; LABEL&lt; term&lt;T&gt; &gt; &gt; \</span>
+<a name="l00252"></a>00252 <span class="preprocessor">OPERATOR(const T &amp; t) { \</span>
+<a name="l00253"></a>00253 <span class="preprocessor">  typedef LABEL&lt; term&lt;T&gt; &gt; TermT; \</span>
+<a name="l00254"></a>00254 <span class="preprocessor">  return term&lt;TermT&gt;(t); \</span>
+<a name="l00255"></a>00255 <span class="preprocessor">}</span>
+<a name="l00256"></a>00256 <span class="preprocessor"></span>
+<a name="l00257"></a>00257 FA_UNARY_OP(unary_minus, <span class="keyword">operator</span>-, -m_t[i]);
+<a name="l00258"></a>00258 FA_UNARY_OP(unary_plus,  <span class="keyword">operator</span>+, m_t[i]);
+<a name="l00259"></a>00259 FA_UNARY_OP(math_exp,    exp, std::exp(m_t[i]));
+<a name="l00260"></a>00260 FA_UNARY_OP(math_log,    log, std::log(m_t[i]));
+<a name="l00261"></a>00261 FA_UNARY_OP(math_log10,  log10, std::log10(m_t[i]));
+<a name="l00262"></a>00262 FA_UNARY_OP(math_sqrt,   sqrt, std::sqrt(m_t[i]));
+<a name="l00263"></a>00263 FA_UNARY_OP(math_cos,    cos, std::cos(m_t[i]));
+<a name="l00264"></a>00264 FA_UNARY_OP(math_sin,    sin, std::sin(m_t[i]));
+<a name="l00265"></a>00265 FA_UNARY_OP(math_tan,    tan, std::tan(m_t[i]));
+<a name="l00266"></a>00266 FA_UNARY_OP(math_acos,   acos, std::acos(m_t[i]));
+<a name="l00267"></a>00267 FA_UNARY_OP(math_asin,   asin, std::asin(m_t[i]));
+<a name="l00268"></a>00268 FA_UNARY_OP(math_atan,   atan, std::atan(m_t[i]));
+<a name="l00269"></a>00269 FA_UNARY_OP(math_cosh,   cosh, std::cosh(m_t[i]));
+<a name="l00270"></a>00270 FA_UNARY_OP(math_sinh,   sinh, std::sinh(m_t[i]));
+<a name="l00271"></a>00271 FA_UNARY_OP(math_tanh,   tanh, std::tanh(m_t[i]));
+<a name="l00272"></a>00272 FA_UNARY_OP(math_abs,    abs, std::abs(m_t[i]));
+<a name="l00273"></a>00273 FA_UNARY_OP(math_fabs,   fabs, std::fabs(m_t[i]));
+<a name="l00274"></a>00274 <span class="preprocessor">#undef FA_UNARY_OP</span>
+<a name="l00275"></a>00275 <span class="preprocessor"></span>
+<a name="l00276"></a>00276 } <span class="comment">// namespace fa</span>
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278 <span class="preprocessor">#endif // FASTARRAY_HPP_</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>FastArray.hpp</b>      </li>
-      <li class="footer">Generated on Mon May 23 2011 15:08:21 for FastArray by&#160;
+      <li class="footer">Generated on Mon May 23 2011 20:56:55 for FastArray by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>
