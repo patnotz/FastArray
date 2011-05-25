@@ -9,6 +9,7 @@ build
 gcc-4.4.4
 gcc-4.4.6
 gcc-4.5.3
+clang
 intel-11.1
 CMakeFiles
 CMakeCache
