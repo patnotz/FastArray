@@ -17,3 +17,5 @@ include_directories(src ${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 add_executable(unit-tests src/unit-tests.cpp)
 target_link_libraries(unit-tests gtest gtest_main)
 add_test(unit-tests unit-tests)
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND}
+                  DEPENDS unit-tests)
