@@ -11,9 +11,20 @@ add_subdirectory(gtest-1.6.0)
 enable_testing(true)
 
 ################################################################################
+# Boost
+################################################################################
+set(Boost_ADDITIONAL_VERSIONS 1.47 1.47.0)
+find_package(Boost 1.47 REQUIRED)
+
+################################################################################
 # FastArray
 ################################################################################
-include_directories(src ${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+include_directories(
+    src 
+    ${gtest_SOURCE_DIR}/include 
+    ${gtest_SOURCE_DIR}
+    ${Boost_INCLUDE_DIRS})
+    
 add_executable(unit-tests src/unit-tests.cpp)
 target_link_libraries(unit-tests gtest gtest_main)
 add_test(unit-tests unit-tests)
